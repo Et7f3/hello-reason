@@ -36,5 +36,13 @@ jobs:
       - name: Test
         run: esy test
 
+      - name: Produce a snapshot binary
+        run: esy npm-release
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: snapshot-${{ matrix.os }}
+          path: _release
+
       - name: Build docs
         run: esy doc
